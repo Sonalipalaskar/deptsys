@@ -1,0 +1,134 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>VIBGYOR</title>
+   
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   <style>
+     /* Navbar gradient background */
+     .navbar-gradient {
+       background: linear-gradient(45deg, #2d7305, #22ce55);
+
+     }
+     .navbar-brand {
+       font-family: 'Poppins', sans-serif; /* Modern font */
+       font-size: 2rem; /* Larger font size */
+       font-weight: bold;
+        color: #ff4500; /* Spicy red color */
+       text-transform: uppercase;
+      letter-spacing: 2px; /* Space out the letters */
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
+      transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for brand */
+.navbar-brand:hover {
+  color: #ffde59; /* Light yellow on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+
+     /* Navbar link styling */
+     .navbar-nav .nav-link {
+       color: white;
+       font-weight: 500;
+       transition: color 0.3s ease, transform 0.3s ease;
+     }
+     .navbar-nav .nav-link:hover {
+       color: #ffde59;
+       transform: scale(1.1);
+     }
+
+     /* User name styling */
+     .navbar .username {
+       color: #ffffff;
+       font-weight: bold;
+       margin-left: 10px;
+       font-size: 1rem;
+     }
+
+     /* Search input styling */
+     .navbar .form-control {
+       background-color: rgba(255, 255, 255, 0.8);
+       color: #333;
+       border: 1px solid #ffde59;
+       transition: background-color 0.3s ease;
+     }
+     .navbar .form-control:focus {
+       background-color: #ffffff;
+       color: #333;
+     }
+     .navbar .btn-primary {
+       background-color: #ffde59;
+       border: none;
+       color: #333;
+       font-weight: bold;
+     }
+     .navbar .btn-primary:hover {
+       background-color: #ffd700;
+       color: #111;
+     }
+   </style>
+</head>
+<body>
+   <div class="container-fluid">
+      <div class="myrow1 row">
+         <nav class="navbar navbar-expand-lg navbar-gradient">
+            <div class="container-fluid">
+              <a class="navbar-brand text-white" href="#">VIBGYOR ADICORP PRIVATE LIMITED</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/profile">My Profile</a>
+                  </li>                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="/mycart">Mycart</a>
+                  </li>
+                  <li class="nav-item">
+                   <a class="nav-link" href="/track-order">Trackorder</a>
+                 </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  {% else %}                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/login">Login</a>
+                   </li>
+                   {% endif %}
+                   
+                   <li class="nav-item">
+                     <a class="nav-link" href="/aboutus">About Us</a>
+                   </li>
+                   
+                </ul>     
+                <ul class="navbar-nav me-3 mb-2 mb-lg-0"> 
+                  <li class="nav-item"></li>
+                  
+                 </ul>       
+              </div>
+              {% if user.is_authenticated %}
+                <span class="username">{{ user.username }}</span>
+              {% endif %}
+            </div>
+          </nav>
+      </div> 
+   </div>
+
+   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+

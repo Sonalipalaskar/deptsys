@@ -1,0 +1,15 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="myrow2 row mt-2 d-flex justify-content-center align-items-center"> <!-- Center the content vertically and horizontally -->
+    <!-- Second column of second row, adjusted to be centered -->
+    <div class="col-12 col-md-10">
+        <div class="row justify-content-center">
+            {% block main %}
+            <!-- Main content (page-specific content) goes here -->
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}

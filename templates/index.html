@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        .table-wrapper {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-title h2 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            margin: 5px;
+        }
+
+        .btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-success, .btn-warning, .btn-danger {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-success a,
+        .btn-warning a,
+        .btn-danger a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-success:hover a,
+        .btn-warning:hover a,
+        .btn-danger:hover a {
+            color: white;
+        }
+		
+		.search-form .form-control {
+               width: 250px; 
+               max-width: 100%; 
+               align-items: 300px;
+            }
+		
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+					<form class="search-form" method="GET" action="{% url 'search_by_text' %}" class="d-flex" role="search">
+						<input class="form-control me-2" type="search" name="query" placeholder="Search site" aria-label="Search" value="{{ request.GET.query }}">
+						<button class="btn btn-success" type="submit">Search</button>
+					</form>
+					
+                    <div class="col-sm-6">						
+                        <h2>Manage <b>Department</b></h2>
+                    </div>
+                    <div class="col-sm-6 text-right">
+						
+                        <button type="button" class="btn btn-success"><a href="/create">Create Department</a></button>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Department Name</th>
+                        <th>Description</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in depts %}
+                    <tr>
+                        <td>{{x.dept_id}}</td>
+                        <td>{{x.dept_name}}</td>
+                        <td>{{x.description}}</td>
+                        <td><button type="button" class="btn btn-warning"><a href="/update/{{x.dept_id}}">Edit</a></button></td>
+                        <td><button type="button" class="btn btn-danger"><a href="/delete/{{x.dept_id}}">Delete</a></button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+{% endblock main %}
+
+</html>
