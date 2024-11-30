@@ -82,7 +82,7 @@ project/
 ```
 
 ## Author
-Your Name (youremail@example.com)
+Sonali Palaskar (sonalipalaskar598@gmail.com)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
