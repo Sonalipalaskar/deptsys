@@ -24,19 +24,25 @@ def create(request):
         details.save()
         return redirect('/')
     
-def updateDept(request,dept_id):
+
+def updateDept(request, dept_id):
     if request.method == "GET":
-        b=Department.objects.filter(dept_id=dept_id)
-        context ={}
-        context['depts'] = b[0]
-        return render(request,'updatedept.html',context)
-    else:
-        b=Department.objects.filter(dept_id=dept_id)
-        n=request.POST['dept_name']
-        d=request.POST['description']
-       
-        b.update(dept_name=n,description=d)
-        return redirect('/')    
+        try:
+            department = Department.objects.get(dept_id=dept_id)
+            return render(request, 'updatedept.html', {'dept': department})
+        except Department.DoesNotExist:
+            return redirect('/')  # Redirect if the department is not found
+
+    elif request.method == "POST":
+        try:
+            department = Department.objects.get(dept_id=dept_id)
+            department.dept_name = request.POST.get('dept_name', department.dept_name)
+            department.description = request.POST.get('description', department.description)
+            department.save()
+            return redirect('/')
+        except Department.DoesNotExist:
+            return redirect('/')  # Redirect if the department is not found
+
     
 def delete(request,dept_id):
     department = Department.objects.get(dept_id=dept_id)  
@@ -44,17 +50,25 @@ def delete(request,dept_id):
     department.save()   
     return redirect('/')
 
+
 def searchByText(request):
     query = request.GET.get('query', '')  # Get the search query from the request
     context = {}
 
     if query:
-        # Filter Cloth objects based on the search query (you can adjust fields to match your needs)
-        data = Department.objects.filter(dept_name__icontains=query)  # Assuming 'name' is a field in your Cloth model
-        context['depts'] = data
+        # Filter departments with status=True and matching the search query
+        data = Department.objects.filter(dept_name__icontains=query, status=True)
     else:
-        data=Department.objects.all()
+        # Retrieve all departments with status=True if no query is provided
+        data = Department.objects.filter(status=True)
+
+    # Check if no results are found
+    if not data.exists():
+        context['message'] = "department not found!!!."
+    else:
         context['depts'] = data
+
     return render(request, 'index.html', context)
+
 
 

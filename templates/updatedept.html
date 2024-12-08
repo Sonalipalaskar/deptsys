@@ -77,10 +77,10 @@
     <form method="post">     
         {% csrf_token %}
         <label for="dept_name">Department Name:</label>
-        <input type="text" name="dept_name" value="{{x.dept_name}}" id="dept_name" ><br>
+        <input type="text" name="dept_name" value="{{dept.dept_name}}" id="dept_name" required><br>
 
         <label for="description">Department Description:</label>
-        <input type="text" name="description" value="{{x.description}}" id="description"><br>        
+        <input type="text" name="description" value="{{dept.description}}" id="description" required><br>        
 
         <input type="submit" value="Update Department">
     </form>
