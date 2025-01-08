@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Dept</title>
+    <title>Update Role</title>
     <style>
         /* Ensure the page takes the full height of the viewport */
         html, body {
@@ -71,16 +71,20 @@
 </head>
 <body>
     <form action="" method="POST">
+     
+        <h2>Create Role </h2>
         {% csrf_token %}
-        <h2>Create Department</h2>
         
-        <label for="dept_name">Department Name:</label>
-        <input type="text" name="dept_name" id="dept_name"><br>
+        <label for="dept_name">Role Name:</label>
+        <input type="text" name="role_name" id="role_name" value="{{ role.role_name }}"><br>
 
-        <label for="description">Department Description:</label>
-        <input type="text" name="description" id="description"><br>      
+        <label for="description">Roles Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter Role Description" style="text-align: left; padding-left: 0; margin-left:1px ;">
+        {{ role.description }}
+        </textarea><br>
 
-        <input type="submit" value="Create">
+
+        <input type="submit" value="Create Role">
     </form>
     
 </body>

@@ -1,10 +1,11 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Dept</title>
+    <title>Update Role</title>
     <style>
         /* Ensure the page takes the full height of the viewport */
         html, body {
@@ -16,16 +17,18 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4; /* Light gray background */
             color: #333; /* Dark gray text */
-            padding: 40px;
             display: flex;
             justify-content: center; /* Horizontally center */
             align-items: center; /* Vertically center */
+            flex-direction: column; /* Stack items vertically */
+            padding: 20px;
         }
         
         h2 {
             text-align: center;
             color: #4CAF50; /* Green heading */
             font-size: 24px;
+            margin-bottom: 20px; /* Space below the heading */
         }
 
         form {
@@ -70,21 +73,18 @@
     </style>
 </head>
 <body>
-    <form action="" method="POST">
+    <h2>Update role</h2>
+    <form method="post">     
         {% csrf_token %}
-        <h2>Create Department</h2>
-        
-        <label for="dept_name">Department Name:</label>
-        <input type="text" name="dept_name" id="dept_name"><br>
+        <label for="role_name">Role Name:</label>
+        <input type="text" name="role_name" value="{{role.role_name}}" id="role_name" required><br>
 
-        <label for="description">Department Description:</label>
-        <input type="text" name="description" id="description"><br>      
+        <label for="description">Roles Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter Role Description">
+            {{ role.description }}
+        </textarea><br>             
 
-        <input type="submit" value="Create">
+        <input type="submit" value="Update Role">
     </form>
-    
 </body>
-
-
-
 </html>
